@@ -45,7 +45,7 @@ const Home = () => {
     formData.append("image", product.imageFile); // actual file
   }
 
-  const result = await mutate("http://localhost:5000/api/v1/product", {
+  const result = await mutate(`${API_BASE_URL}/product`, {
     method: "POST",
     body: formData,
     // ⚠️ Do NOT set Content-Type manually — browser will set multipart/form-data with boundary
