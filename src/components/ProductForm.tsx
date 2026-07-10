@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormBootstrap from 'react-bootstrap/Form';
 import { useFetch } from '../hooks/useFetch'; // <-- your custom hook
-import type { Product } from "../types/Product";
+import type { NewProduct, Product } from "../types/Product";
 import { API_BASE_URL } from "../config/api";
 
 interface Category {
@@ -47,7 +47,7 @@ const ProductForm = ({ onSubmit }: ProductFormProps) => {
     `${API_BASE_URL}/units`
   );
 
-  const initialValues: Product = {
+  const initialValues: NewProduct = {
     name: '',
     description: '',
     price: 0,

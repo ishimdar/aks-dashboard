@@ -1,6 +1,6 @@
 // src/types/Product.ts
-export interface Product {
-  _id?: string;
+export interface NewProduct {
+  // _id: string;
   name: string;
   description: string;
   price: number;
@@ -10,4 +10,8 @@ export interface Product {
   unit: string;
   imageUrl?: string;   // optional, backend may not always return
   imageFile?: File;    // optional, used only in frontend form
+}
+
+export interface Product extends NewProduct {
+  _id: string; // required once saved
 }

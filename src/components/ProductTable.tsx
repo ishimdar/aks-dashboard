@@ -1,20 +1,20 @@
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { FaEdit, FaTrash } from 'react-icons/fa'; // import icons
-// import type { Product } from "../types/Product";
+import type { Product } from "../types/Product";
 
 // Define the shape of your product data
-interface Product {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  stock: number;
-  quantity: number;
-  unit: string;
-  imageUrl: string;
-}
+// interface Product {
+//   _id: string;
+//   name: string;
+//   description: string;
+//   price: number;
+//   category: string;
+//   stock: number;
+//   quantity: number;
+//   unit: string;
+//   imageUrl: string;
+// }
 
 // Type the props for your component
 interface ProductTableProps {
