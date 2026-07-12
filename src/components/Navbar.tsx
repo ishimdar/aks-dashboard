@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import logo  from "../assets/logo.png";
+// import logo  from "../assets/logo.png";
 
 const AksNavbar = () => {
   return (
@@ -9,7 +9,7 @@ const AksNavbar = () => {
       <Navbar bg="light" data-bs-theme="light" expand="lg">
         <Container>
           <Navbar.Brand href="#home">
-            <img src={logo} alt="logo" />
+            <img src="https://res.cloudinary.com/ozyxuezu/image/upload/v1783856296/logo_rtqtpx.png" alt="logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">  

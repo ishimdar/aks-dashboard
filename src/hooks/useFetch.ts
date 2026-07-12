@@ -66,8 +66,19 @@ export function useFetch<T = unknown>(
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
         }
-        const result: R = await response.json();
-        return result;
+
+        const contentType = response.headers.get('content-type') || '';
+        const responseText = await response.text();
+
+        if (!responseText) {
+          return null;
+        }
+
+        if (contentType.includes('application/json')) {
+          return JSON.parse(responseText) as R;
+        }
+
+        return responseText as unknown as R;
       } catch (err: any) {
         setError(err.message || "Something went wrong during mutation.");
         return null;

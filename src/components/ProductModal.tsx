@@ -1,39 +1,51 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ProductForm from './ProductForm';
+import type { Product } from '../types/Product';
 
 interface ProductModalProps {
-  onAddProduct: (product: any) => void;
+  show: boolean;
+  onHide: () => void;
+  editingProduct: Product | null;
+  onAddProduct: (product: Product) => Promise<void>;
+  onUpdateProduct: (product: Product) => Promise<void>;
+  isSubmitting?: boolean;
 }
 
-function ProductModal({ onAddProduct }: ProductModalProps) {
-  const [show, setShow] = useState(false);
+function ProductModal({
+  show,
+  onHide,
+  editingProduct,
+  onAddProduct,
+  onUpdateProduct,
+  isSubmitting = false,
+}: ProductModalProps) {
+  const isEditMode = Boolean(editingProduct);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleSubmit = async (product: Product) => {
+    if (isEditMode) {
+      await onUpdateProduct(product);
+    } else {
+      await onAddProduct(product);
+    }
+    onHide();
+  };
 
   return (
-    <div className="d-flex justify-content-end mb-3">
-      {/* Button aligned to the right */}
-      <Button variant="primary" onClick={handleShow}>
-        Add Product
-      </Button>
-
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <ProductForm
-            onSubmit={(product) => {
-              onAddProduct(product);
-              handleClose();
-            }}
-          />
-        </Modal.Body>
-      </Modal>
-    </div>
+    <Modal show={show} onHide={onHide} centered>
+      <Modal.Header closeButton onHide={onHide}>
+        <Modal.Title>{isEditMode ? 'Edit Product' : 'Add Product'}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <ProductForm
+          initialValues={editingProduct}
+          isEditMode={isEditMode}
+          isSubmitting={isSubmitting}
+          submitLabel={isEditMode ? 'Update Product' : 'Add Product'}
+          onSubmit={handleSubmit}
+          onCancel={onHide}
+        />
+      </Modal.Body>
+    </Modal>
   );
 }
 
